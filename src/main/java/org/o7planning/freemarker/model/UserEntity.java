@@ -1,17 +1,21 @@
 package org.o7planning.freemarker.model;
 
-public class Person {
+import org.o7planning.freemarker.Dto.UserDto;
+
+public class UserEntity {
+
+    private Long id;
 
     private String firstName;
+
     private String lastName;
 
-    public Person() {
-
+    public Long getId() {
+        return id;
     }
 
-    public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -30,4 +34,11 @@ public class Person {
         this.lastName = lastName;
     }
 
+    public UserEntity() {
+    }
+
+    public UserEntity(UserDto userDto) {
+        this.firstName = userDto.getFirstName();
+        this.lastName = userDto.getLastName();
+    }
 }

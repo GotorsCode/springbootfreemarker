@@ -1,8 +1,12 @@
-package org.o7planning.freemarker.form;
+package org.o7planning.freemarker.Dto;
 
-public class PersonForm {
+
+import org.o7planning.freemarker.model.UserEntity;
+
+public class UserDto {
 
     private String firstName;
+
     private String lastName;
 
     public String getFirstName() {
@@ -21,4 +25,11 @@ public class PersonForm {
         this.lastName = lastName;
     }
 
+    public UserDto() {
+    }
+
+    public UserDto(UserEntity userEntity) {
+        this.firstName = userEntity.getFirstName();
+        this.lastName = userEntity.getLastName();
+    }
 }
