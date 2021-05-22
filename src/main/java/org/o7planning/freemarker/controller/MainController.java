@@ -5,11 +5,7 @@ import org.o7planning.freemarker.Service.UserService;
 import org.o7planning.freemarker.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MainController {
@@ -29,6 +25,17 @@ public class MainController {
     public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
         userService.createUser(userDto);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/user/{id}m")
+    public ResponseEntity<?> modifyUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
+        userService.modifyUser(id, userDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value="/user_delete")
+    public void deleteUser(@RequestParam(value = "id", required = true) Long id) {
+        userService.deleteUser(id);
     }
 
 }

@@ -22,8 +22,24 @@ public class UserService {
     }
 
     public Map<Long, UserEntity> getUsers() {
-        return users;
+        Map<Long, UserEntity> realUsers = new HashMap<>();
+        for (Map.Entry<Long, UserEntity> entry : users.entrySet()) {
+            if (!entry.getValue().getDeleted()) realUsers.put(entry.getKey(), entry.getValue());
+        };
+        return realUsers;
     }
 
+    public void deleteUser(Long id) {
+        for (Map.Entry<Long, UserEntity> entry : users.entrySet()) {
+            if ((id!=null)&&(id.equals(entry.getValue().getId()))) {entry.getValue().setDeleted(true);}
+        }
+    }
+
+    public void modifyUser(Long userId, UserDto userDto) {
+        if ((userId!=null)&&(userId<=id)) {
+            users.get(userId).setFirstName(userDto.getFirstName());
+            users.get(userId).setLastName(userDto.getLastName());
+        }
+    }
 
 }

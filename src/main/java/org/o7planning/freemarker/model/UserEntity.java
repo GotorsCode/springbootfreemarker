@@ -10,6 +10,8 @@ public class UserEntity {
 
     private String lastName;
 
+    private Boolean isDeleted = false;
+
     public Long getId() {
         return id;
     }
@@ -40,5 +42,13 @@ public class UserEntity {
     public UserEntity(UserDto userDto) {
         this.firstName = userDto.getFirstName();
         this.lastName = userDto.getLastName();
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
     }
 }
