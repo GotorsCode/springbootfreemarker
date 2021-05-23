@@ -14,27 +14,24 @@ public class MainController {
     public UserService userService;
 
     @GetMapping("/user/{id}")
-    public UserDto getUser(@PathVariable(name = "id") Long id) {
+    public UserDto getUser(@PathVariable(name = "id") Long id) throws Exception {
 
-        UserEntity user = userService.getUsers().get(id);
-
-        return new UserDto(user);
+        return userService.getUser(id);
     }
 
     @PostMapping("/user")
-    public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
-        userService.createUser(userDto);
-        return ResponseEntity.ok().build();
+    public Long createUser(@RequestBody UserDto userDto) {
+        return userService.createUser(userDto);
     }
 
-    @PostMapping("/user/{id}m")
-    public ResponseEntity<?> modifyUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
+    @PutMapping("/user/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
         userService.modifyUser(id, userDto);
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping(value="/user_delete")
-    public void deleteUser(@RequestParam(value = "id", required = true) Long id) {
+    @DeleteMapping("/user/{id}")
+    public void deleteUser(@PathVariable(value = "id") Long id) {
         userService.deleteUser(id);
     }
 
