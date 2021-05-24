@@ -24,7 +24,9 @@ public class UserService {
     }
 
     public UserDto getUser(Long userId) throws Exception {
-        UserEntity userEntity = users.get(userId);
+
+        UserEntity userEntity = (users.get(userId).getDeleted()) ? null : users.get(userId);
+
         if (userEntity == null) {
             throw new Exception();
         }
